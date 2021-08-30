@@ -15,7 +15,7 @@ const [, , url] = process.argv
   )
 
   titles.forEach(([chapterTitle, ...sectionTitles], chapterIndex) => {
-    console.log(`### ${chapterIndex + 1} ${chapterTitle}`)
+    console.log(`### ${chapterIndex + 1}. ${chapterTitle}`)
     console.log()
 
     if (sectionTitles.length <= 0) {
@@ -25,7 +25,7 @@ const [, , url] = process.argv
     }
 
     sectionTitles.forEach((sectionTitle, sectionIndex) => {
-      console.log(`#### ${chapterIndex + 1}.${sectionIndex + 1} ${sectionTitle}`)
+      console.log(`#### ${chapterIndex + 1}.${sectionIndex + 1}. ${sectionTitle}`)
       console.log()
       console.log("- ")
       console.log()
