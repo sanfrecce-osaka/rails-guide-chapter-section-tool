@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sanfrecce-osaka/rails-guide-chapter-section-tool/issues"
   },
-  "homepage": "https://github.com/sanfrecce-osaka/rails-guide-chapter-section-tool#readme"
+  "homepage": "https://github.com/sanfrecce-osaka/rails-guide-chapter-section-tool#readme",
+  "dependencies": {
+    "puppeteer": "^10.2.0"
+  }
 }
