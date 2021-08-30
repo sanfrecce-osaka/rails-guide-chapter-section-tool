@@ -18,5 +18,8 @@
   "homepage": "https://github.com/sanfrecce-osaka/rails-guide-chapter-section-tool#readme",
   "dependencies": {
     "puppeteer": "^10.2.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2"
   }
 }
