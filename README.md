@@ -5,11 +5,13 @@
 ### Installation
 
 ```bash
-yarn install
+$ yarn install
 ```
 
 ### Usage
 
 ```bash
-node index.js https://railsguides.jp/active_record_migrations.html > result.txt
+$ node index.js
+? choices title Active Record クエリインターフェイス
+? output to result.txt
 ```

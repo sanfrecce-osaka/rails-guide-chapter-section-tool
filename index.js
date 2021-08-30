@@ -1,12 +1,21 @@
+const inquirer = require("inquirer")
 const puppeteer = require("puppeteer")
-
-const [, , url] = process.argv
+const fs = require("fs")
 
 ;(async () => {
   const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
-  await page.goto(url)
+  await page.goto("https://railsguides.jp/")
+  const links = await page.$$eval("dt > a", (elements) =>
+    Object.fromEntries(elements.map((element) => [element.innerText, element.getAttribute("href")]))
+  )
 
+  const { title, fileName } = await inquirer.prompt([
+    { type: "list", name: "title", message: "choices title", choices: Object.keys(links) },
+    { type: "input", name: "fileName", message: "output to" },
+  ])
+
+  await page.goto(`https://railsguides.jp/${links[title]}`)
   await page.waitForSelector("ol.chapters")
   const chapters = await page.$$("ol.chapters > li")
 
@@ -14,22 +23,22 @@ const [, , url] = process.argv
     chapters.map(async (chapter) => await chapter.$$eval("a", (anchors) => anchors.map(({ innerText }) => innerText)))
   )
 
-  titles.forEach(([chapterTitle, ...sectionTitles], chapterIndex) => {
-    console.log(`### ${chapterIndex + 1}. ${chapterTitle}`)
-    console.log()
+  const text = titles
+    .flatMap(([chapterTitle, ...sectionTitles], chapterIndex) => [
+      `### ${chapterIndex + 1}. ${chapterTitle}`,
+      "",
+      ...(sectionTitles.length <= 0
+        ? ["- ", ""]
+        : sectionTitles.flatMap((sectionTitle, sectionIndex) => [
+            `#### ${chapterIndex + 1}.${sectionIndex + 1}. ${sectionTitle}`,
+            "",
+            "- ",
+            "",
+          ])),
+    ])
+    .join("\n")
 
-    if (sectionTitles.length <= 0) {
-      console.log("- ")
-      console.log()
-      return
-    }
+  fs.writeFile(fileName, text, (error) => console.log(error ? error : "write end"))
 
-    sectionTitles.forEach((sectionTitle, sectionIndex) => {
-      console.log(`#### ${chapterIndex + 1}.${sectionIndex + 1}. ${sectionTitle}`)
-      console.log()
-      console.log("- ")
-      console.log()
-    })
-  })
   await browser.close()
 })()
