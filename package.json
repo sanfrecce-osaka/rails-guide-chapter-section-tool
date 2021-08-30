@@ -1,0 +1,19 @@
+{
+  "name": "rails-guide-chapter-section-tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanfrecce-osaka/rails-guide-chapter-section-tool.git"
+  },
+  "author": "sanfrecce-osaka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sanfrecce-osaka/rails-guide-chapter-section-tool/issues"
+  },
+  "homepage": "https://github.com/sanfrecce-osaka/rails-guide-chapter-section-tool#readme"
+}
